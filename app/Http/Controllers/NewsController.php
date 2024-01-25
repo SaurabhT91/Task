@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\news;
+use App\Models\News;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class NewsController extends Controller
         {
             
             if (array_key_exists('dc:creator', $a)) {
-                $newsData = news::create([
+                $newsData = News::create([
                     'title' => $a['title'],
                     'description' => $a['description'],
                     'link' => $a['link'],
@@ -39,7 +39,7 @@ class NewsController extends Controller
                 ]);
             }
             else{
-                $newsData = news::updateorcreate([
+                $newsData = News::updateorcreate([
                     'title' => $a['title'], 
                     'description' => $a['description'], 
                     'link' => $a['link'],
@@ -54,6 +54,7 @@ class NewsController extends Controller
     }
     public function showData()
     {
-        return view('showData', ['data' => news::all()]);
+        $this->callApi();
+        return view('showData', ['data' => News::all()]);
     }
 }

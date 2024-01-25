@@ -41,13 +41,13 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-                        <form method="GET" action="{{ route('callApi') }}">
+                        <form method="GET" action="{{ route('showData') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('callApi')"
+                            <x-dropdown-link :href="route('showData')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('News API') }}
+                                {{ __('Show News Table') }}
                             </x-dropdown-link>
                         </form>
 
