@@ -26,28 +26,18 @@ class NewsController extends Controller
         DB::table('news')->truncate();      
         foreach ($array as $a)
         {
-            
-            if (array_key_exists('dc:creator', $a)) {
-                $newsData = News::create([
+
+            $newsData = News::updateOrCreate(
+                [
                     'title' => $a['title'],
                     'description' => $a['description'],
                     'link' => $a['link'],
                     'guid' => $a['guid'],
                     'publish_date' => $a['pubDate'],
-                    'creator' => $a["dc:creator"]['#text'],
                     'enclosure' => $a['enclosure']['@url'],
-                ]);
-            }
-            else{
-                $newsData = News::updateorcreate([
-                    'title' => $a['title'], 
-                    'description' => $a['description'], 
-                    'link' => $a['link'],
-                    'guid' => $a['guid'],
-                    'publish_date' => $a['pubDate'],
-                    'enclosure' => $a['enclosure']['@url'],
-                ]);
-            }
+                    'creator' => array_key_exists('dc:creator', $a) ? $a["dc:creator"]['#text'] : null,
+                ]
+            );
                 
         }
         return response()->redirectTo('showData');        
