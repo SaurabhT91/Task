@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/callApi', [ApiController::class, 'callApi'])->name('callApi');
-Route::get('/showData', [ApiController::class, 'showData'])->name('showData');
+Route::get('/callApi', [NewsController::class, 'callApi'])->name('callApi');
+Route::get('/showData', [NewsController::class, 'showData'])->name('showData');
 
 require __DIR__.'/auth.php';

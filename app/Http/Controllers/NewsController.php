@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\newsData;
+use App\Models\news;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class ApiController extends Controller
+class NewsController extends Controller
 {
     public function callApi()
     {
@@ -23,13 +23,12 @@ class ApiController extends Controller
         {
             $array[] = json_decode(json_encode($d), true);
         }
-        // dd($array);
-        DB::table('news_Data')->truncate();      
+        DB::table('news')->truncate();      
         foreach ($array as $a)
         {
             
             if (array_key_exists('dc:creator', $a)) {
-                $newsData = newsData::create([
+                $newsData = news::create([
                     'title' => $a['title'],
                     'description' => $a['description'],
                     'link' => $a['link'],
@@ -40,7 +39,7 @@ class ApiController extends Controller
                 ]);
             }
             else{
-                $newsData = newsData::updateorcreate([
+                $newsData = news::updateorcreate([
                     'title' => $a['title'], 
                     'description' => $a['description'], 
                     'link' => $a['link'],
@@ -55,6 +54,6 @@ class ApiController extends Controller
     }
     public function showData()
     {
-        return view('showData', ['data' => newsData::all()]);
+        return view('showData', ['data' => news::all()]);
     }
 }

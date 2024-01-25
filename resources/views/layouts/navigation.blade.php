@@ -47,7 +47,7 @@
                             <x-dropdown-link :href="route('callApi')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Call TOI Api') }}
+                                {{ __('News API') }}
                             </x-dropdown-link>
                         </form>
 
